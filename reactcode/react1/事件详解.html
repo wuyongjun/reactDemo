@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>51牧码人——http://www.51mmr.net 专注[前端+Java],人才培养</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .red {
+            color: red;
+        }
+    </style>
+    <script src="lib/react.development.js"></script>
+    <script src="lib/react-dom.development.js"></script>
+    <script src="lib/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="root">
+
+    </div>
+
+    <script type="text/babel">
+        class Demo extends React.Component{
+            constructor(){
+                super();
+
+                this.state={
+                    msg:'aaa'
+                };
+
+                this.handleClick2 = this.handleClick2.bind(this);
+            }
+            handleClick1(){
+                this.setState({
+                    msg:Date.now()
+                })
+            }
+            handleClick2(){
+                this.setState({
+                    msg:Date.now()
+                })
+            }
+            handleClick3(){
+                this.setState({
+                    msg:Date.now()
+                })
+            }
+            handleClick4 = () =>{
+                this.setState({
+                    msg:Date.now()
+                })
+            }
+            render(){
+                return (<div>
+                    <button onClick={this.handleClick1.bind(this)}>按钮1</button>
+                    <button onClick={this.handleClick2}>按钮2</button>
+                    <button onClick={()=>this.handleClick3()}>按钮3</button>
+                    <button onClick={this.handleClick4}>按钮4</button>
+
+                    <div>{this.state.msg}</div>
+                </div>)
+            }
+        }
+
+        ReactDOM.render(
+            <Demo />,
+            document.querySelector('#root')
+        )
+    </script>
+</body>
+
+</html>

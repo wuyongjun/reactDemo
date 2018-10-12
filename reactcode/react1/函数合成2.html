@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>51牧码人——http://www.51mmr.net 专注[前端+Java],人才培养</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+    </style>
+    <script>
+       /* function compose(fn1,fn2){ //函数合成
+            return function(x){
+                return fn1(fn2(x))
+            }
+        }*/
+        /*function show1(n){
+            return n+1;
+        }
+        function show2(n){
+            return n+10;
+        }*/
+        const compose = (fn1,fn2)=>x=>fn1(fn2(x));
+        const show1 = n=>n+1;
+        const show2 = n=>n+10;
+
+        let res = compose(show1,show2)(10);
+
+        console.log(res);
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

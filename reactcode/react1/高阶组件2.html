@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>51牧码人——http://www.51mmr.net 专注[前端+Java],人才培养</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .red {
+            color: red;
+        }
+    </style>
+    <script src="lib/react.development.js"></script>
+    <script src="lib/react-dom.development.js"></script>
+    <script src="lib/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="root">
+
+    </div>
+
+    <script type="text/babel">
+        /* function FnHOC(MyCom){ //高阶组件
+            return class Mid extends React.Component{
+                render(){
+                    return (<div>
+                        <MyCom name="welcome" title="suzhou">
+                            <strong>牧码人</strong>
+                        </MyCom>
+                    </div>)
+                }
+            }
+        } */
+        const FnHOC = (Component) => () =>(<div>
+            <Component name="welcome" title="suzhou">
+                <strong>牧码人</strong>
+            </Component>
+        </div>);
+        
+
+        const Basic = (props) =>(<div {...props}>
+            <h1>{props.name}</h1>
+            {props.children}
+        </div>);
+
+        let NewComponent = FnHOC(Basic);
+        ReactDOM.render(
+            <NewComponent />,
+            document.querySelector('#root')
+        )
+    </script>
+</body>
+
+</html>

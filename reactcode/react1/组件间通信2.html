@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>51牧码人——http://www.51mmr.net 专注[前端+Java],人才培养</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .red {
+            color: red;
+        }
+    </style>
+    <script src="lib/react.development.js"></script>
+    <script src="lib/react-dom.development.js"></script>
+    <script src="lib/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="root">
+
+    </div>
+
+    <script type="text/babel">
+        class Child extends React.Component{
+            constructor(){
+                super();
+
+                this.state ={
+                    msg:'我是子级的数据哦...'
+                };
+            }
+            handleClick = () =>{
+                this.props.aa(this.state.msg);
+            }
+            render(){
+                return (<div>
+                    <strong>子级</strong>
+                    <button onClick={this.handleClick}>按钮</button>
+                </div>)
+            }
+        }
+
+        class Parent extends React.Component{
+            constructor(){
+                super();
+            }
+            fn = (args) =>{
+                alert(args);
+            }
+            render(){
+                return (<div>
+                    <h2>welcome 51mmr.net</h2>
+                    <Child aa={this.fn}></Child>
+                </div>)
+            }
+        }
+
+        ReactDOM.render(
+            <Parent />,
+            document.querySelector('#root')
+        )
+    </script>
+</body>
+
+</html>

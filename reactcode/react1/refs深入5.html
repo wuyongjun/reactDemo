@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>51牧码人——http://www.51mmr.net 专注[前端+Java],人才培养</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .red {
+            color: red;
+        }
+    </style>
+    <script src="lib/react.development.js"></script>
+    <script src="lib/react-dom.development.js"></script>
+    <script src="lib/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="root">
+
+    </div>
+
+    <script type="text/babel">
+        class TextInput extends React.Component{
+            constructor(){
+                super();
+
+                this.state = {
+                    msg:'xxxx'
+                };
+            }
+            show(){
+                console.log(this.state.msg);
+                console.log('这是子组件里面的东西')
+            }
+            render(){
+                return (<div>
+                    <input type="text"/>
+                </div>)
+            }
+        }
+        class Demo extends React.Component{
+            componentDidMount(){
+                //获取到 TextInput
+                this.textInput.show();
+            }
+            render(){
+                return (<div>
+                    <TextInput ref={(textInput)=>this.textInput = textInput} />
+                </div>)
+            }
+        }
+        ReactDOM.render(
+            <Demo />,
+            document.querySelector('#root')
+        )
+    </script>
+</body>
+
+</html>

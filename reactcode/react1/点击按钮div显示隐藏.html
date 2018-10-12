@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>51牧码人——http://www.51mmr.net 专注[前端+Java],人才培养</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .red {
+            color: red;
+        }
+    </style>
+    <script src="lib/react.development.js"></script>
+    <script src="lib/react-dom.development.js"></script>
+    <script src="lib/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="root">
+
+    </div>
+
+    <script type="text/babel">
+        class ChangeDemo extends React.Component{
+            constructor(){
+                super();
+
+                this.state={
+                    bSign:true
+                }
+
+                this.handleChange = this.handleChange.bind(this);
+            }
+            handleChange(){
+                let oDiv = document.querySelector('#div1');
+
+                this.setState({
+                    bSign:!this.state.bSign
+                });
+
+                if(this.state.bSign){
+                    oDiv.style.display='none';
+                }else{
+                    oDiv.style.display='block';
+                }
+            }
+            render(){
+                console.log(this.state.bSign);
+                return (<div>
+                    <button onClick={this.handleChange}>{this.state.bSign?'隐藏':'显示'}</button>
+                    <div style={{
+                        width:'100px',
+                        height:'100px',
+                        background:'#369'
+                    }} id="div1"></div>
+                </div>)
+            }
+        }
+
+        ReactDOM.render(
+            <ChangeDemo />,
+            document.querySelector('#root')
+        )
+    </script>
+</body>
+
+</html>

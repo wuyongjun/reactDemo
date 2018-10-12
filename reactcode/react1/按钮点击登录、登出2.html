@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>51牧码人——http://www.51mmr.net 专注[前端+Java],人才培养</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .red {
+            color: red;
+        }
+    </style>
+    <script src="lib/react.development.js"></script>
+    <script src="lib/react-dom.development.js"></script>
+    <script src="lib/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="root">
+
+    </div>
+
+    <script type="text/babel">
+        const UserState = ({isLogin}) =>{
+            return isLogin?<h2>欢迎回来^_^</h2>:<h2>已退出登录</h2>
+        }
+
+        class App extends React.Component{
+            constructor(){
+                super();
+                this.state={
+                    isLogin:true
+                };
+            }
+            fnLogout = () =>{
+                this.setState({isLogin:false})
+            }
+            fnLogin = () =>{
+                this.setState({isLogin:true})
+            }
+            render(){
+                let isLogin = this.state.isLogin;
+                let button = null;
+                if(isLogin){
+                    button = <button onClick={this.fnLogout}>点击退出</button>
+                }else{
+                    button = <button onClick={this.fnLogin}>点击登录</button>
+                }
+
+                return (<div>
+                    <UserState isLogin={isLogin} />
+                    {button}
+                </div>)
+            }
+        }
+        ReactDOM.render(
+            <App />,
+            document.querySelector('#root')
+        )
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>51牧码人——http://www.51mmr.net 专注[前端+Java],人才培养</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .red {
+            color: red;
+        }
+    </style>
+    <script src="lib/react.development.js"></script>
+    <script src="lib/react-dom.development.js"></script>
+    <script src="lib/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="root">
+
+    </div>
+
+    <script type="text/babel">
+        let Component = React.Component;
+
+
+        class Demo extends Component{
+            constructor(){
+                super();
+
+                this.state = {
+                    username:'',
+                    age:20
+                };
+            }
+            handleChangeAge = (ev) =>{
+                this.setState({
+                    age:ev.target.value
+                })
+            }
+            handleChangeUser = (ev) =>{
+                this.setState({
+                    username:ev.target.value
+                })
+            }
+            handleSubmit = (ev) =>{
+                let {username, age} = this.state;
+                alert(`${username}, ${age}`);
+                ev.preventDefault();
+            }
+            render(){
+                return (<div>
+                    <form onSubmit={this.handleSubmit}>
+                        <label>
+                            姓名:
+                            <input type="text" name="username" value={this.state.username} onChange={this.handleChangeUser}/>
+                        </label>
+                        <label>
+                            年龄:
+                            <input type="number" name="age" value={this.state.age} onChange={this.handleChangeAge}/>
+                        </label>
+                        <button>提交</button>
+                    </form>
+                </div>)
+            }
+        }
+
+        ReactDOM.render(
+            <Demo />,
+            document.querySelector('#root')
+        )
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>51牧码人——http://www.51mmr.net 专注[前端+Java],人才培养</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .red {
+            color: red;
+        }
+    </style>
+    <script src="lib/react.development.js"></script>
+    <script src="lib/react-dom.development.js"></script>
+    <script src="lib/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="root">
+
+    </div>
+
+    <script type="text/babel">
+        class Demo extends React.Component{
+            constructor(){
+                super();
+                this.state={
+                    value:'',
+                    arr:[]
+                }
+            }
+            handleChange = (ev) =>{
+                this.setState({
+                    value:ev.target.value
+                });
+            }
+            handleSubmit = () =>{
+                let arr = [...this.state.arr];
+                arr.unshift(this.state.value);
+
+                this.setState({
+                    arr,
+                    value:''
+                });
+            }
+            keySend = (ev) =>{
+                //console.log(ev.which);
+                //找键码  ev.keyCode   ev.which
+
+                if(ev.which == 13){
+                    this.handleSubmit();
+                }
+            }
+            handleDel = (index)=>{
+                let arr = [...this.state.arr];
+                arr.splice(index,1);
+
+                this.setState({arr});
+            }
+            render(){
+                return (<div>
+                    <input type="text" placeholader="请输入名字"
+                        value={this.state.value}
+                        onChange={this.handleChange}
+                        onKeyDown={this.keySend}
+                    />
+                    <button onClick={this.handleSubmit}>添加</button>
+
+                    <ul>
+                        {
+                            this.state.arr.map((val,index)=>
+                                <li key={index}>
+                                    {val}
+                                    <a href="javascript:;" onClick={()=>this.handleDel(index)}>删除</a>
+                                </li>
+                            )
+                        }
+                    </ul>
+                </div>)
+            }
+        }
+
+        ReactDOM.render(
+            <Demo />,
+            document.querySelector('#root')
+        )
+    </script>
+</body>
+
+</html>

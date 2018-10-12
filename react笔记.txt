@@ -1,0 +1,717 @@
+react框架
+库
+
+库:  jquery,zepto,lodash
+	封装了一堆函数
+框架: 解决开发、程序问题、框架大而全
+	angluar
+
+对于前端，库和框架并没有严格之分，
+
+react库、框架
+--------------------------------------------------------
+
+对前端来说流行：
+	vue	weex
+	react
+	angular
+--------------------------------------------------------
+react优势:
+	虚拟DOM
+	性能高
+	可以用到移动端
+	组件化编写
+	RN(react native)
+
+https://reactjs.org/
+--------------------------------------------------------
+react劣势:
+	前端一直jq之类库，学习过程想当然
+	学习成本高， 相比vue来说， js基础略薄弱
+	react单纯只做view层
+--------------------------------------------------------
+
+React ->  专注view层，UI层，官方也说，用于构建用户界面js库
+
+--------------------------------------------------------
+具备:
+	1. js基础，函数
+	2. ES6语法， react全面拥抱ES6
+		https://ke.qq.com/course/274758?tuin=2a26ba34
+
+		箭头函数、类、模板字符串、let、const、模块导入、导出
+	3. 耐心点、别着急
+--------------------------------------------------------
+扩展运算符(展开运算符)，剩余参数:
+
+	...
+
+1. 数组
+2. 对象， json
+3. 箭头函数
+5. 类  class xxx{}
+--------------------------------------------------------
+
+函数式编程:
+1. 面向对象和面向过程并列编程规范
+2. 主要特征，函数是第一等公民(函数老牛逼)
+3. 纯净的，没有副作用，才是合格函数
+
+“正确”答案
+
+高阶函数:
+	所谓高阶函数，就是函数的参数可以是函数
+
+	map
+	filter
+	reduce
+函数合成:
+	一个值要经过多个函数，才能变成另外一个值，可以把所有中间步骤合并成一个函数
+	compose
+
+函数柯里化:
+	函数柯里化表现: 多参函数，变成函数嵌套，子函数用父函数变量
+
+--------------------------------------------------------
+jsx:
+	专业术语是， 一种javascript语法扩展
+	简单理解，就是在js中可以直接书写html标签，类似 XML标记
+
+let a = "<div>welcome</div>"
+
+let a = <div>welcome</div>	就是jsx语法
+
+关于jsx语法需要注意地方:
+
+1. 书写格式
+	let a = <h1>welcome 51mmr.net</h1>
+2. 多个标签，必须有一个根元素
+	let a = <h1>welcome 51mmr.net</h1><span>xxx</span>	×
+
+	let a = <div><h1>welcome 51mmr.net</h1><span>xxx</span></div>	√
+3. 可以随意缩进
+	
+	let a = <div>
+		<h1>welcome 51mmr.net</h1>
+		<span>xxx</span>
+	</div>
+4. 单标记必须闭合
+	let a = <img>	×
+	let a = <img  />  √
+
+	let a = <div>   ×
+	let a = <div />	√
+5. jsx语法里面写js代码，必须用 {}
+	let str = 'welcome';
+	let a = <div>{str}</div>
+6. class  -> className
+
+	let a = <div className="xxx">aaa</div>
+
+7. style -> 写成json形式   
+	json属于js语法
+
+	let a = <div style={{width:'100px', height:'100px', background:'red'}}></div>
+8. 事件
+
+	普通html中:  <div onclick="xxx"></div>
+
+
+	在jsx中，事件名，必须采用驼峰命名发，单词首字母大写
+
+	let a = <div onclick="xxx">xxxx</div>	×
+
+	let a = <div onClick="xxx">xxxx</div>	√
+
+
+	onmouseover	->	onMouseOver
+	onmouseout	->	onMouseOut
+	oncontextmenu ->	onContextMenu
+	onchange	->	onChange
+	oninput	->	onInput
+	......
+------------------------------------------------------------------
+react开发模式:
+	1. 直接react相关文件，引入页面
+	2. 基于webpack构建   ，此方式居多
+
+引入文件:
+	小项目、尝鲜一些react语法，专题页面等
+
+<script src="lib/react.js"></script>	react核心库
+<script src="lib/react-dom.js"></script>	react虚拟DOM操作
+<script src="lib/babel.js"></script>	转jsx语法
+
+
+<script type="text/babel">
+	jsx代码        
+</script>
+
+
+ReactDOM.render(渲染谁, 插入到哪);
+
+
+注意: 玩react, 最好把所有代码都放到server环境下
+
+------------------------------------------------------------
+jsx本身通过babel转完以后，就是一个普通js对象
+
+jsx可以随意和 if、for、赋值给变量、参数传递、当返回  搭配使用
+
+let a = <div>welcome to china</div>
+
+
+<div>welcome to china</div>  ->    React.createElement('div',null,'welcome to china')
+
+
+react元素，
+
+元素想渲染到页面上， ReactDOM.render()
+
+
+react元素，是构成React应用最小单位
+
+
+特别注意:
+	{}	大括号里面不能直接输出一个对象
+
+
+
+当整体通过定时器更新一片react代码时候，只会局部更新，性能高
+
+
+组件:
+	- 组件在react中非常重要
+	- 所谓组件，其实在react中就是‘类’的概念
+		类的定义形式
+			ES6  class
+			ES5  函数
+
+注意: 组件名字，首字母需要大写
+
+组件定义两种方式：
+	1. 函数
+	2. class类
+
+函数:
+	定义:	
+		function Title(){
+			return xxxx
+		}
+
+		const Title = ()=><h3>标题3</h3>; 
+	调用:
+		<Title />
+		<Title></Title>
+类定义方式:
+	class Title extends React.Component{
+	    render(){
+	        return <h3>标题3</h3>
+	    }
+	}
+
+函数定义组件和类定义区别:
+		生命周期	状态(state)	this指向
+	函数:	无		无		乱
+	类:	有		有		靠谱
+
+
+关于属性:  props
+
+	1. 函数:
+		function Title(props){
+			props.name
+		}
+
+		<Title name="aaa" />
+	2. 类
+		class Title extends Component{
+			render(){
+				let {name,age} = this.props;
+				return <h3>{name} {age}</h3>
+			}
+		}
+组件可以嵌套:
+	
+---------------------------------------------
+检测属性传进来值:
+	类型、默认值
+
+	React v 1.5x之前 ， React.PropTypes
+
+	之后，需要单独库文件:  prop-types
+
+	class Title extends Component{
+	    static propTypes ={	//检测类型
+	        name:PropTypes.string
+	    }
+	    static defaultProps = { //默认值
+	        name:123
+	    };
+	    render(){
+	        return <h3>{this.props.name}</h3>
+	    }
+	}
+	---------------------------------
+	class Title extends Component{
+	    render(){
+	        return <h3>{this.props.name}</h3>
+	    }
+	}
+	Title.propTypes ={	//检测类型
+		name:PropTypes.string
+	}
+	Title.defaultProps = { //默认值
+		name:123
+	};
+
+	PropTypes.string
+	PropTypes.number
+	PropTypes.bool
+	PropTypes.func
+	PropTypes.array
+	...
+---------------------------------------------
+关于props一定注意:
+	只读，不能修改
+
+---------------------------------------------
+
+状态:  state
+
+	state在React中非常重要，函数定义定义组件形式，没有状态，只能通过class
+
+加事件:
+	注意this
+
+---------------------------------------------
+this.setState({状态名字})	 用此函数设置状态，设置完以后，视图会自动更新
+
+计算数，不要 ++
+	count++	不好
+	count+1	靠谱
+
+
+this.setState(state,fnCallBack)	fnCallBack是在状态设置成功后才会触发
+
+---------------------------------------------
+生命周期构造函数:
+	1. componentWillMount	组件挂载前
+	2. componentDidMount	组件挂载后
+	3. componentWillUpdate	组件更新前
+	4. componentDidUpdate	组件更新后
+	5. componentWillUnmount	组件卸载
+
+在react中阻止冒泡:
+	ev.nativeEvent.stopImmediatePropagation();
+
+--------------------------------------------------------
+点击按钮div显示隐藏
+	
+
+--------------------------------------------------------
+获取某个元素
+	1. 跟原生js一样，直接通过 querySelector
+	2. <div ref="div1"></div>
+		获取:  this.refs.div1
+	3. ev.target	当前操作元素本身
+
+--------------------------------------------------------
+输入框同步文字:
+
+	原生js:  onchange	当失去焦点的时候触发
+
+	oinput	实时触发
+
+	到了react中，注意： onChange，相当于 oninput
+
+--------------------------------------------------------
+拖拽:
+	
+========================================
+事件:
+	和HTML身上添加事件，类似，区别:
+	
+	1. React事件，采用驼峰命名发
+	2. 采用jsx语法， 函数不能放到字符串中，得放 {}
+
+	<div onClick="show"></div>	
+	<div onClick={this.show}></div>
+
+
+最早倡导: 行为、结构、表现相分离
+	oDiv.addEventListener('click',xxx,false)	
+
+现在: 增加内聚，很多东西放到在一起，容易管理，还可以避免全局污染
+
+
+		事件				阻止默认行为		阻止冒泡
+传统HTML:    <input onclick="show" />		return false		ev.cancelBubble=true;
+React中:        <input onClick={show} />		ev.preventDefault	ev.nativeEvent.stopImmediatePropagation()
+
+
+矫正React中事件this:
+	a). onClick={this.handleClick1.bind(this)}
+	b). 在构造函数里解决
+		this.handleClick2 = this.handleClick2.bind(this);
+	c). onClick={()=>this.handleClick3()}
+	d). onClick={this.handleClick4}
+		定义: 用箭头函数定义
+
+		handleClick4 = () =>{
+			this.setState({
+			    msg:Date.now()
+			})
+		}
+-----------------------------------------------
+ev:
+	注意: 如果碰见传参了，ev放到最后
+
+==========================================
+条件 if:
+	React中条件渲染和js保持一致，使用 if，三目  &&(条件运算符)
+
+	模拟登陆、登出
+==========================================
+列表:
+	React通过  {arr} 在jsx内部构建一个元素集合
+
+	arr -> 装了一堆react元素
+
+	每个人需要一个key, 一般都是后台传过来id
+		a). key只要确保是唯一， Math.random()
+		b). 索引
+==========================================
+表单:
+	React中表单，和html中用法有点不一样
+
+
+	input   text
+	input	radio
+	input	checkbox
+	select
+
+	<input type="text" value="xxx" />
+	<input type="radio" checked />
+	<textarea>这里面写值</textarea>
+
+在React中使用表单注意：
+1. value / checked 属性设置后，用户是无法操作的
+2. textarea 的值建议设置到value属性
+3. select的value属性，值代表选中值，不建议使用option的selected属性
+4. input/textarea 会有 onChange， 用户每次输入都会触发(和oninput表现一样)， 不是失去焦点触发
+5. radio/checkbox 点击后会 onChange
+
+提交表单:
+	
+
+表单在react分类:
+	1. 受控表单	受React程序控制
+		提交数据， onChange，改变state
+	2. 非受控表单	平时很正常
+		提交数据    原生DOM方式，  ref
+
+		给默认是:
+			text  textarea  select	需要写  defaultValue
+			checkbox radio		需要写  defaultChecked
+----------------------------------------------------------
+简易留言板：
+	
+----------------------------------------------------------
+子组件里面内容:
+	
+	this.props.children	组件的内容
+
+----------------------------------------------------------
+
+<App>
+	<Header />
+	<Main>
+		<List>
+			<Title />
+		</List>
+	</Main>
+	<Footer />
+</App>
+----------------------------------------------------------
+父子组件如何进行数据通信:
+
+	父级 -> 子级
+		<Parent>
+			<Child 属性名={xxx} />
+		</Parent>
+
+		this.props....
+	子级 -> 父级
+		<Child fnCallback={这里是父级的一个函数} />
+
+		子级:
+
+		this.props.fnCallback(xxx)
+
+----------------------------------------------------------
+ref  注意:
+	1. this.refs.xxx  字符串形式，目前为止(2018-4-13) 还可以使用，但是官方已经不推荐
+	2. 官方更加推荐使用 	回调函数		√
+		ref={(input)=>this.input=input}
+<input ref="xxxx" />
+
+点击按钮，让input聚焦:
+
+
+
+ref 不仅可以加给React元素，还可以加给 组件
+
+========================================
+高阶组件: (HOC)  Higher Order Component  高阶组件
+
+	高阶组件其实就是一个函数
+	函数的参数接收了一个组件，返回一个新的组件
+========================================
+webpack构建React环境:
+	https://ke.qq.com/course/285826?tuin=2a26ba34
+
+1. 下载react相关安装包
+	cnpm i
+		babel-core
+		babel-loader
+		babel-preset-env
+		babel-preset-stage-0
+	
+		react
+		react-dom
+		babel-preset-react
+
+
+	预设一定记得配置:
+		1. 参数
+		2. .babelrc
+2. HtmlWebpackPlugin
+	cnpm i html-webpack-plugin
+3. 配置webpack.config.js
+	....
+4. 安装webpack相关模块
+	cnpm i 
+		webpack-dev-server
+		webpack
+		webpack-cli
+========================================
+react脚手架:
+	不用你去关心繁琐配置，拿来就用
+
+1. cnpm i create-react-app -g
+
+2. 用create-react-app 创建项目
+	
+	create-react-app <项目名>
+
+3. 启动
+	npm run start
+	
+	或者
+
+	yarn start
+
+4. 你需要关心的 src
+
+** import语句需要放到整个文件开头
+
+========================================
+关于React样式问题:
+1. 直接引入	√
+	import './xxx.css'
+
+	<h2 className="xxx"></h2>
+
+2. styled-components
+	cnpm i styled-components -D
+
+	使用:
+		import styled from 'styled-components'
+
+		const Title = styled.h2`
+			font-size:20px;
+			text-align:center;
+			...
+		`
+3. 想使用less
+	默认create-react-app 不支持less
+
+	必须自己修改它的配置文件
+
+	如何修改create-react-app配置:
+		1. 运行一个命令
+			npm run eject		拷贝一份配置文件，覆盖掉node_modules里面的配置
+			或者运行  yarn eject
+		2. 修改
+			config/webpack.config.dev.js
+			config/webpack.config.prod.js
+
+	安装loader:
+		cnpm i less-loader less -D
+
+4. css module
+	默认css-loader,没有开启， 只要开启
+
+		加上参数:
+			{
+				modules:true
+			}
+
+	import Button from './button.css'
+
+	Button.button
+====================================
+css module还有一种办法:
+	react-scripts-cssmodules:
+		1. create-react-app <项目名> --scripts-version react-scripts-cssmodules
+		2. 定义模块的css
+			button.css	这就是普通css
+			Button.module.css	这就是一个css module
+		
+====================================
+
+	
+	
+
+	
+
+
+
+
+
+
+	
+		
+
+
+
+
+
+	
+
+
+
+
+	
+
+
+
+
+
+	
+
+
+
+
+
+	
+	
+	
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+	
+
+
+
+
+
+
+
+
+
+
+

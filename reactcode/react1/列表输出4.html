@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>51牧码人——http://www.51mmr.net 专注[前端+Java],人才培养</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .red {
+            color: red;
+        }
+    </style>
+    <script src="lib/react.development.js"></script>
+    <script src="lib/react-dom.development.js"></script>
+    <script src="lib/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="root">
+
+    </div>
+
+    <script type="text/babel">
+        //let {Component} = React;
+        let Component = React.Component;
+
+        const ListItem =({value}) => <li>{value}</li>;
+
+        class Demo extends Component{
+            constructor(){
+                super();
+
+                this.state={
+                    arr:['apple','banana','orange','pear']
+                };
+            }
+            render(){
+                let arr = this.state.arr.map((val,index)=><ListItem key={index} value={val} />)
+
+                return (<ul>
+                    {arr}
+                </ul>)
+            }
+        }
+
+        ReactDOM.render(
+            <Demo />,
+            document.querySelector('#root')
+        )
+    </script>
+</body>
+
+</html>

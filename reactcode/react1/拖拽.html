@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>51牧码人——http://www.51mmr.net 专注[前端+Java],人才培养</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .red {
+            color: red;
+        }
+    </style>
+    <script src="lib/react.development.js"></script>
+    <script src="lib/react-dom.development.js"></script>
+    <script src="lib/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="root">
+
+    </div>
+
+    <script type="text/babel">
+        class Demo extends React.Component{
+            constructor(){
+                super();
+
+                this.state={
+                    left:0,
+                    top:0
+                };
+
+                this.oDiv = null;
+                this.disX = 0;
+                this.disY = 0;
+            }
+            fnDown(ev){
+                this.oDiv = ev.target;
+
+                this.disX = ev.clientX - this.oDiv.offsetLeft;
+                this.disY = ev.clientY - this.oDiv.offsetTop;
+
+                document.onmousemove = this.fnMove.bind(this);
+                document.onmouseup = this.fnUp.bind(this);
+
+            }
+            fnMove(ev){
+                this.setState({
+                    left:ev.clientX - this.disX,
+                    top:ev.clientY - this.disY
+                },()=>{
+                    this.oDiv.style.left = this.state.left + 'px';
+                    this.oDiv.style.top = this.state.top + 'px';
+                })
+            }
+            fnUp(){
+                document.onmousemove = document.onmouseup = null;
+            }
+            render(){
+                return (<div style={{
+                    width:'100px',
+                    height:'100px',
+                    background:'red',
+                    position:'absolute',
+                    left:0,
+                    top:0
+                }} onMouseDown={this.fnDown.bind(this)}></div>)
+            }
+        }
+
+        ReactDOM.render(
+            <Demo />,
+            document.querySelector('#root')
+        )
+    </script>
+</body>
+
+</html>

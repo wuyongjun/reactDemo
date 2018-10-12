@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>51牧码人——http://www.51mmr.net 专注[前端+Java],人才培养</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .red {
+            color: red;
+        }
+    </style>
+    <script src="lib/react.development.js"></script>
+    <script src="lib/react-dom.development.js"></script>
+    <script src="lib/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="root">
+
+    </div>
+
+    <script type="text/babel">
+        const Child = (props) =>(<div>
+            <strong>子级</strong>
+            <div>{props.msg}</div>
+        </div>)
+
+        class Parent extends React.Component{
+            constructor(){
+                super();
+
+                this.state={
+                    msg:'我是父级的数据哦....'
+                };
+            }
+            render(){
+                return (<div>
+                    <h2>welcome 51mmr.net</h2>
+                    <Child msg={this.state.msg}></Child>
+                </div>)
+            }
+        }
+
+        ReactDOM.render(
+            <Parent />,
+            document.querySelector('#root')
+        )
+    </script>
+</body>
+
+</html>

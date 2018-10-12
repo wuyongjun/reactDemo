@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>51牧码人——http://www.51mmr.net 专注[前端+Java],人才培养</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .red {
+            color: red;
+        }
+    </style>
+    <script src="lib/react.development.js"></script>
+    <script src="lib/react-dom.development.js"></script>
+    <script src="lib/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="root">
+
+    </div>
+
+    <script type="text/babel">
+        function destory(){
+            ReactDOM.render(
+                <span>销毁留下的垃圾...</span>,
+                document.querySelector('#root')
+            )
+        }
+
+        class MyComponent extends React.Component{
+            constructor(props){
+                super(props);
+                this.state={
+                    count:10
+                };
+            }
+
+            componentWillMount(){
+                console.log('组件挂载前');
+            }
+
+            componentDidMount(){
+                console.log('组件挂载后')
+            }
+
+            componentWillUpdate(){
+                console.log('组件更新前');
+            }
+
+            componentDidUpdate(){
+                console.log('组件更新后');
+            }
+
+            componentWillUnmount(){
+                console.log('组件卸载');
+            }
+
+            fnClick(ev){
+                this.setState({
+                    count:this.state.count+1
+                })
+                ev.nativeEvent.stopImmediatePropagation();
+            }
+            render(){
+                return (<div>
+                    <h3>{this.state.count}</h3>
+                    <button onClick={this.fnClick.bind(this)}>更新</button>
+                </div>)
+            }
+        }
+
+        ReactDOM.render(
+            <MyComponent />,
+            document.querySelector('#root')
+        )
+
+        document.onclick=function(){
+            destory();
+        };
+    </script>
+</body>
+
+</html>
