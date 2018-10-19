@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>react time</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="lib/react.development.js"></script>
+	<script src="lib/react-dom.development.js"></script>
+    <script src="lib/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        let destroy = () => {
+           ReactDOM.render(
+               <span>已经把组件销毁了。。。</span>,
+               document.querySelector('#root')
+           );
+        }
+        // 定义一个自定义组件 组件内的所有属性和方法都属于该对象，this.进行调用
+        // react组件生命周期： componentWillMount  componentDidMount  componentWillUpdate  componentDidUpdate  componentWillUnmount
+        class MyComponent extends React.Component {
+            // 定义状态，属性
+            constructor (props) {
+                super(props);
+                this.state = {
+                    count: 0
+                }
+            }
+            increment () {
+                let oldCount = this.state.count;
+                this.setState({
+                    count: oldCount + 1
+                });
+            }
+            componentWillMount () {
+                console.log('组件挂载前');
+            }
+            componentDidMount () {
+                console.log('组件挂载后');
+            }
+            componentWillUpdate () {
+                console.log('组件更新前');
+            }
+            componentDidUpdate () {
+                console.log('组件更新后');
+            }
+            componentWillUnmount () {
+                console.log('组件即将销毁');
+            }
+            render () {
+               return (<div>
+                    <h3>{this.state.count}</h3>
+                    <button onClick={this.increment.bind(this)}>增 加</button>
+                    <button onClick={destroy}>销 毁</button>
+               </div>) 
+            }
+        }
+        ReactDOM.render(
+            <MyComponent />,
+            document.querySelector('#root')
+        )
+    </script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>react time</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="lib/react.development.js"></script>
+	<script src="lib/react-dom.development.js"></script>
+	<script src="lib/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        let tick = () => {
+            let clock = (<div>
+                    <h1>react clock</h1>
+                    <h2>{new Date().toLocaleTimeString()}</h2>
+                </div>);
+            ReactDOM.render(clock, document.querySelector('#root'));
+        };
+
+        // setInterval(tick, 1000);
+        let destroy = () => {
+            ReactDOM.render(
+                <span>时钟销毁了。。。</span>,
+                document.querySelector('#root')
+            );
+        }
+
+        class Tick extends React.Component {
+            constructor (props) {
+                super(props);
+                this.state = {
+                    time: new Date()
+                }
+                // 但是这样的写法有缺陷，就是何时去销毁定时器，这需要利用到生命周期
+                // setInterval(() => {
+                //     this.setState({
+                //         time: new Date()
+                //     });
+                // }, 1000);
+            }
+            componentDidMount () {
+                this.createClock();                
+            }
+            componentWillUnmount () {
+                this.destroyClock();
+            }
+            createClock () {
+                this.timer = setInterval(() => {
+                    this.setState({
+                        time: new Date()
+                    });
+                }, 1000);
+            }
+            destroyClock () {
+                console.log('destroy clock success');
+                clearInterval(this.timer);
+            }
+            render () {
+                return (
+                    <div>
+                        <h3>时 钟</h3>
+                        <strong>{this.state.time.toLocaleTimeString()}</strong><br/>
+                        <button onClick={destroy}>销毁时钟</button> 
+                    </div>
+                );
+            }
+        }
+        ReactDOM.render(
+            <Tick />,
+            document.querySelector('#root')
+        )
+
+    </script>
+</body>
+</html>

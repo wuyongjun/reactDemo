@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- 该meta非常重要，一定要添加，否则babel就会因编码而报错 -->
+	<meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>react</title>
+	<script src="lib/react.development.js"></script>
+	<script src="lib/react-dom.development.js"></script>
+	<script src="lib/babel.min.js"></script>
+</head>
+<body>
+	<div id="root">
+		
+	</div>
+    <script type="text/babel">
+        let { Component } = React;
+        class Demo extends Component {
+            constructor (props) {
+                super(props);
+
+                this.state = {
+                    arr: ['black', 'green', 'blue', 'yellow']
+                }
+            }
+            render () {
+                // let arr = [];
+                // this.state.arr.forEach(v => arr.push(<li key={Math.random()}>{v}</li>));
+                let arr = this.state.arr.map(value => <li key={Math.random()}>{value}</li>);
+                return (<ul>{arr}</ul>);
+            }
+        }
+        ReactDOM.render(<Demo />, document.querySelector('#root'))
+	</script>
+</body>
+</html>

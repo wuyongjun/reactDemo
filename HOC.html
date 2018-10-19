@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- 该meta非常重要，一定要添加，否则babel就会因编码而报错 -->
+	<meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>react form</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" rel="stylesheet">
+	<script src="lib/react.development.js"></script>
+	<script src="lib/react-dom.development.js"></script>
+	<script src="lib/babel.min.js"></script>
+</head>
+<body>
+	<div id="root"></div>
+    <script type="text/babel">
+        // 高阶组件：本质就是函数，函数的参数是组件，返回值是新的组件
+        // let HOC = (Component) => {
+        //     return class newCom extends React.Component {
+        //         render () {
+        //             return (
+        //                 <div>
+        //                     <Component title="welcome" name="HOC">
+        //                         吴永军    
+        //                     </Component>    
+        //                 </div>
+        //             )
+        //         }
+        //     }
+        // }
+        // class Basic extends React.Component {
+        //     render () {
+        //         return (
+        //             <div {...this.props}>
+        //                 <h1>{this.props.title}</h1>
+        //                 <h5>{this.props.children}</h5>    
+        //             </div>
+        //         )
+        //     }
+        // }
+        // let Component = HOC(Basic);
+        let Basic = props => (<div {...props}>
+            <h1>{props.title}</h1>
+            <h5>{props.children}</h5>
+        </div>);
+
+        let FnHOC = (Component) => () => (<div>
+            <Component title="welcome" name="HOC">吴沐瑶</Component>
+        </div>);
+
+        let Component = FnHOC(Basic);
+
+        ReactDOM.render(<Component />, document.querySelector('#root'));
+	</script>
+</body>
+</html>

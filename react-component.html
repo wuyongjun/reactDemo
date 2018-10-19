@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>react time</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="lib/react.development.js"></script>
+	<script src="lib/react-dom.development.js"></script>
+    <script src="lib/babel.min.js"></script>
+    <script src="lib/prop-types.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        // 定义一个最简单的组件, react中组件就是类，由两种形式：函数和class
+        // function Title () {
+        //     return <h3>我是一个简单的组件</h3>
+        // }
+        const Title1 = (props) => <h3>{props.name}</h3>;
+        // 相当于React.Component
+        let { Component } = React;
+        class Title extends Component {
+            static propTypes = {
+                name: PropTypes.string
+            }
+            static defaultProps = {
+                name: 'aaaaa'
+            }
+            render () {
+                console.log(this);
+                let {name, age} = this.props;
+                return <h3>{name}-{age}</h3>
+            }
+        }
+        ReactDOM.render(
+            <Title age="18" />,
+            document.querySelector('#root')
+        )
+    </script>
+</body>
+</html>

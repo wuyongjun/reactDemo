@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- 该meta非常重要，一定要添加，否则babel就会因编码而报错 -->
+	<meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>react显示隐藏div</title>
+	<script src="lib/react.development.js"></script>
+	<script src="lib/react-dom.development.js"></script>
+	<script src="lib/babel.min.js"></script>
+</head>
+<body>
+	<div id="root">
+		
+	</div>
+	<script type="text/babel">
+		
+        // 定义组件
+        class ChangeDisplay extends React.Component {
+            constructor () {
+                super();
+                this.state = {
+                    isShow: true
+                }
+            }
+            changeDisplay () {
+                // let div = document.querySelector('#div');
+                let div = this.refs.div;
+
+                this.setState({
+                    isShow: !this.state.isShow
+                });
+
+                if (this.state.isShow) {
+                    div.style.display = 'none';
+                } else {
+                    div.style.display = 'block';
+                }
+            }
+            render () {
+                return (
+                    <div>
+                        <button onClick={this.changeDisplay.bind(this)}>{this.state.isShow ? '隐藏': '显示'}</button>
+                        <div style={{
+                            width: '100px',
+                            height: '100px',
+                            background: '#657'
+                        }} id="div" ref="div"></div>
+                    </div>
+                )
+            }
+        }
+        ReactDOM.render(
+            <ChangeDisplay />,
+            document.querySelector('#root')
+        );
+	</script>
+</body>
+</html>

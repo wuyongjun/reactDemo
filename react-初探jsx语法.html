@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- 该meta非常重要，一定要添加，否则babel就会因编码而报错 -->
+	<meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>react</title>
+	<style>
+		.red {
+			color: red;
+		}
+	</style>
+	<script src="lib/react.development.js"></script>
+	<script src="lib/react-dom.development.js"></script>
+	<script src="lib/babel.min.js"></script>
+</head>
+<body>
+	<div id="root">
+		
+	</div>
+	<script type="text/babel">
+		// ??? 此处有一个问题，给show方法传参的时候刷新页面时就会执行函数，而且监听事件失效
+		let show = (event, note) => console.log(note);
+		
+		let msg = 'Hello world';
+		// let note = '事件在jsx里面一定要用驼峰命名法！'
+
+		let a = <div onClick={show.bind('123')}
+				style={{ background: 'gray', fontWeight: 'bold', display: 'flex', justifyContent: 'center',
+				alignItems: 'center', cursor: 'pointer' }}>
+			<h1 className="red">{msg}</h1>
+		</div>;
+
+		ReactDOM.render(a, document.querySelector('#root'));
+	</script>
+</body>
+</html>

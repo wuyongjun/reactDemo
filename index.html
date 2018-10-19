@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>react demo</title>
+	<script type="text/javascript">
+		// 高阶函数----即参数为函数的函数 map filter reduce
+		let fn1 = n => Math.abs(n);
+		let add = (x, y, fn) => fn(x) + fn(y); // add即为高阶函数
+		let res = add(-10, 10, fn1)
+		console.log('res', res);
+
+		let arr = [1.1, 2.1, 3.1];
+		let fn = n => n**2;
+		console.log(arr.map(fn));
+		console.log(arr.map(String));
+		console.log(arr.map(Math.floor));
+
+		let sum = arr.reduce((prev, curr) => prev + curr, 10);
+		console.log('sum', sum);
+		//函数合成 一个值要经过多个函数，才能变成另一个值，可以把中间过程的函数合并起来,将多个函数合并起来 compose(fn1,fn2,fn3...)(params)
+		let x = 10;
+		let add1 = n => n + 1;
+		let add2 = n => n + 10;
+		// x = add1(x);
+		// x = add2(x);
+		// console.log('x', x);
+		//返回值为函数
+		// function compose (fn1, fn2) {
+		// 	return function (n) {
+		// 		return fn2(fn1(n));
+		// 	}
+		// }
+		let compose = (fn1, fn2) => n => fn2(fn1(n));
+		console.log(compose(add1, add2)(x));
+		// 函数柯里化 将函数的多个参数变成单一参数 因为函数合成最好是单一参数的函数，所以要将多参函数柯里化
+		// 利用了闭包，子函数可以使用父函数的参数
+		// function plus (n1, n2) {
+		// 	return n1 + n2;
+		// }
+		function plus (n1) { // 函数柯里化
+			return function (n2) {
+				return n1 + n2;
+			}
+		}
+		console.log('plus', plus(1)(2));
+		let plus1 = n1 => n2 => n1 + n2;
+		console.log('plus1', plus1(3)(5));
+	</script>
+</head>
+<body>
+	<h1>welcome</h1>
+</body>
+</html>

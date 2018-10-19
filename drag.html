@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>react time</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="lib/react.development.js"></script>
+	<script src="lib/react-dom.development.js"></script>
+    <script src="lib/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        // 定义拖拽组件
+        class Drag extends React.Component {
+            constructor () {
+                super();
+                // 定义div的left和top
+                this.state = {
+                    left: 0,
+                    top: 0
+                }
+                
+                this.disX = 0;
+                this.disY = 0;
+                this.oDiv = null;
+            }
+            fnDown (ev) {
+                // 获取要拖拽的div元素
+                this.oDiv = ev.target;
+                // 记录div元素x轴和y轴上的距离
+                this.disX = ev.clientX - this.oDiv.offsetLeft;
+                this.disY = ev.clientY - this.oDiv.offsetTop;
+                // 往document上注册onmousemove事件 
+                document.onmousemove = this.fnMove.bind(this);
+                // 注册onmouseup事件
+                document.onmouseup = this.fnUp.bind(this);
+
+                ev.preventDefault();
+            }
+            fnMove (ev) {
+                this.setState({
+                    left: ev.clientX - this.disX,
+                    top: ev.clientY - this.disY   
+                }, () => {
+                    // 将left和top设置到div上
+                    this.oDiv.style.left = `${this.state.left}px`;
+                    this.oDiv.style.top = `${this.state.top}px`;
+                });
+            }
+            fnUp () {
+                // 干掉注册的事件
+                document.onmousemove = document.onmouseup = null;
+            }
+            render () {
+                return (
+                    <div>
+                        <div style={{
+                            width: '100px',
+                            height: '100px',
+                            background: 'red',
+                            position: 'absolute'
+                        }} onMouseDown={this.fnDown.bind(this)}></div>
+                        <p>微信小程序的基础库升级到了 1.6.0 之后，提供了许多新的 API，其中新增了录音管理的 API，
+                        不同于以前只有 wx.startRecord 和 wx.stopRecord 两个简单的录音功能，新的 wx.getRecorderManager 
+                        接口提供了包括扩展时长、采样率、录音通道、码率、格式等在内的许多配置项。基于此，我们能更加轻松的控制录音，
+                        新提供的 onFrameRecorded 的事件，甚至可以实现流式语音识别。</p>
+                    </div>
+                )
+            }
+        }
+
+        ReactDOM.render(
+            <Drag />,
+            document.querySelector('#root')
+        );
+    </script>
+</body>
+</html>
